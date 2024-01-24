@@ -8,7 +8,7 @@
                 <div class="card w-40 sm:w-48">
                     <div class="w-full h-60 bg-sky-200 rounded-lg overflow-hidden sm:h-80">
                         <a href="/show/post/<%= ele._id %>">
-                        <img src="/images/uploads/<%= ele.image %>" class="w-full h-full object-cover" alt="">
+                            <img src="data:<%= ele.image.contentType %>;base64,<%= ele.image.data.toString('base64') %>" class="w-full h-full object-cover" alt="">
                     </a>
                     </div>
                     <h5 class="mt-2 text-sm">

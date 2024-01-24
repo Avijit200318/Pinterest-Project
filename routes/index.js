@@ -10,7 +10,6 @@ const upload = require("./multer");
 passport.use(new localStrategy(userModel.authenticate()));
 
 router.get('/', function (req, res, next) {
-  // res.render("index", {nav: false, error: req.flash("error")});
   res.render("index");
 });
 
@@ -60,26 +59,59 @@ router.get("/show/post/:cardid", isLoggedIn,async function(req, res) {
 
 router.post("/createPost", isLoggedIn, upload.single("postimage"), async function(req, res) {
   const user = await userModel.findOne({username: req.session.passport.user});
+
+  // Read the image file as binary data
+  const imageBuffer = require('fs').readFileSync(req.file.path);
+
+  // Create a new post with image data
   const post = await postModel.create({
     user: user._id,
     title: req.body.title,
     description: req.body.description,
-    image: req.file.filename
+    image: {
+      data: imageBuffer,
+      contentType: req.file.mimetype, // Set the appropriate content type
+    },
   });
+
   user.posts.push(post._id);
   await user.save();
-  res.redirect("/profile");
-})
 
-router.post("/fileupload", isLoggedIn, upload.single("image"),async function(req, res, next) {
-  if(!req.file) {
-    return res.status(400).send('No file were uploaded');
-  }
-  const user = await userModel.findOne({username: req.session.passport.user});
-  user.profileImage = req.file.filename;
-  await user.save();
+  // Remove the uploaded file as it is already stored in the database
+  require('fs').unlinkSync(req.file.path);
+
   res.redirect("/profile");
-})
+});
+
+router.post("/fileupload", isLoggedIn, upload.single("image"), async function(req, res, next) {
+  try {
+    if (!req.file) {
+      return res.status(400).send('No file was uploaded');
+    }
+
+    const user = await userModel.findOne({ username: req.session.passport.user });
+
+    // Read the image file as binary data
+    const imageBuffer = require('fs').readFileSync(req.file.path);
+
+    // Update the user's profileImage field in the database
+    user.profileImage = {
+      data: imageBuffer,
+      contentType: req.file.mimetype,
+    };
+
+    // Save the updated user object
+    await user.save();
+
+    // Remove the uploaded file as it is already stored in the database
+    require('fs').unlinkSync(req.file.path);
+
+    res.redirect("/profile");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
 router.post("/searchText", async function(req, res) {
   console.log(req.body.searchTxt);

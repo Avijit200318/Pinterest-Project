@@ -11,8 +11,13 @@
                     <i class="ri-pencil-line text-zinc-800"></i>
                 </span>
                 <div class="w-28 h-28 bg-zinc-200 rounded-full overflow-hidden sm:w-32 sm:h-32 md:w-36 md:h-36">
-                    <img class="w-full h-full object-cover overflow-hidden"
-                        src="./images/uploads/<%= user.profileImage%>" alt="">
+                    <% if (user.profileImage && user.profileImage.contentType && user.profileImage.data) { %>
+                        <img class="w-full h-full object-cover overflow-hidden"
+                             src="data:<%= user.profileImage.contentType %>;base64,<%= user.profileImage.data.toString('base64') %>" alt="">
+                      <% } else { %>
+                        <img class="w-full h-full object-cover overflow-hidden"
+                             src="" alt="">
+                      <% } %>
                 </div>
             </div>
             <h1 class="text-3xl font-semibold mt-3"><%= user.name%></h1>
@@ -25,8 +30,9 @@
             <div class="card">
                 <div class="w-60 h-40 bg-zinc-200 rounded-lg overflow-hidden">
                     <a href="/show/post">
-                    <img class="w-full h-full object-cover"
-                        src="./images/uploads/<%= user?.posts[0]?.image %>" alt=""></a>
+                        <img class="w-full h-full object-cover"
+                        src="data:<%= user?.posts[0]?.image.contentType %>;base64,<%= user?.posts[0]?.image.data.toString('base64') %>"
+                        alt="">
                 </div>
                 <h3 class="inline-block text-lg font-medium mt-2"><%= user.posts[0]?.title%></h3>
                 <h5 class="text-xs font-semibold opacity-60"><%= user.posts.length%> Pins</h5>

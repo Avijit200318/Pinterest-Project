@@ -8,7 +8,10 @@ const postSchema = mongoose.Schema({
   title: String,
   description: String,
   profileImage: String,
-  image: String,
+  image: {
+    data: Buffer,
+    contentType: String,
+  },
 });
 
 

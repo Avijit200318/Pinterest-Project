@@ -3,7 +3,7 @@
         <div class="box w-[95%] bg-white  rounded-2xl flex flex-col overflow-hidden shadow-[0_3px_10px_rgb(0,0,0,0.2)] mb-4 md:[92%] lg:w-[80%] xl:w-[78%] 2xl:w-[70%] sm:justify-center sm:h-[67vh] md:h-[71vh] lg:h-[75vh] sm:mb-0 sm:flex-row">
             
             <div class="left bg-red-500 w-[100%] h-[114vw] sm:h-full sm:w-[50%] sm:h-auto xl:w-[50%] xl:h-auto">
-                <img id="postImage" src="/images/uploads/<%= post.image%>" class="w-full h-full object-cover" alt="">
+                <img id="postImage" src="data:<%= post.image.contentType %>;base64,<%= post.image.data.toString('base64') %>" class="w-full h-full object-cover" alt="">
             </div>
             <div class="right bg-white w-[100%] h-full px-6 pt-8 pb-4 relative sm:w-[50%] sm:px-14 sm:py-12">
                 <div class="w-full inline-block">
@@ -13,7 +13,8 @@
                 <div class="flex justify-between items-center">
                     <div class="flex gap-2 items-center">
                         <div class="image w-16 h-16 rounded-full bg-red-500 mt-5 overflow-hidden">
-                            <img src="/images/uploads/<%= post.user.profileImage %>" class="w-full h-full object-cover" alt="">
+                            <img src="data:<%= post.user.profileImage.contentType %>;base64,<%= post.user.profileImage.data.toString('base64') %>"
+     class="w-full h-full object-cover" alt="">
                         </div>
                         <div class="mt-4 sm:mt-12">
                             <h1 class="text-sm font-semibold">@<%= post.user.username %></h1>
@@ -49,7 +50,7 @@
             <div class="card w-40 sm:w-48">
                 <div class="w-full h-60 bg-sky-200 rounded-lg overflow-hidden sm:h-80">
                     <a href="/show/post/<%= ele._id%>">
-                    <img src="/images/uploads/<%= ele.image %>" class="w-full h-full object-cover" alt="">
+                        <img src="data:<%= ele.image.contentType %>;base64,<%= ele.image.data.toString('base64') %>" class="w-full h-full object-cover" alt="">
                 </a>
                 </div>
             </div>
