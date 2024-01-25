@@ -8,7 +8,7 @@
       </div>
       <h1 class="text-2xl mb-10 tracking-tight capitalize font-semibold text-center leading-none">Welcome to Pinterest</h1>
       <% if(error.length){%>
-        <p class="w-auto absolute text-red-700/75 text-sm left-14 top-28 mt-2 font-semibold text-center md:top-32 md:left-28 2xl:w-[18vw]"><%= error%></p>
+        <p class="w-auto absolute text-red-700/75 text-sm left-12 top-28 mt-2 font-semibold text-center md:top-32 md:left-28 2xl:w-[18vw]"><%= error%></p>
         <% } %>
       <form action="/login" method="post">
         <input class="border-2 rounded-md block mt-2 w-full px-3 py-2" type="text" name="username" placeholder="User Name" autocomplete="off">

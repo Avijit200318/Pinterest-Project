@@ -143,7 +143,7 @@ router.post("/register", function(req, res) {
 
 router.post("/login", passport.authenticate("local", {
   successRedirect: "/profile",
-  failureRedirect: "/",
+  failureRedirect: "/signIn",
   failureFlash: true
 }), function (req, res, next) {
 });
