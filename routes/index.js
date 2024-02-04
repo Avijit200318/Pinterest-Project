@@ -57,6 +57,37 @@ router.get("/show/post/:cardid", isLoggedIn,async function(req, res) {
   res.render("singleImage", {post, allPosts ,nav: true, activePage: 'feed'});
 })
 
+router.get("/edit", isLoggedIn, async function (req, res) {
+  const user = await userModel.findOne({ username: req.session.passport.user })
+  res.render("edit", { nav: true, activePage: "profile", user: user });
+})
+
+
+router.post("/update", upload.single('image'), async function (req, res) {
+  try {
+    let user = await userModel.findOne({ username: req.session.passport.user });
+
+    if (user) {
+      user.username = req.body.username;
+      user.name = req.body.name;
+      user.contact = req.body.contact;
+
+      if (req.file) {
+        user.profileImage.data = require('fs').readFileSync(req.file.path);
+        user.profileImage.contentType = req.file.mimetype;
+      }
+
+      user = await user.save();
+      res.redirect("/profile");
+    } else {
+      res.status(404).send("User not found");
+    }
+  } catch (error) {
+    console.error("Error updating user:", error);
+    res.status(500).send("Error updating user");
+  }
+});
+
 router.post("/createPost", isLoggedIn, upload.single("postimage"), async function(req, res) {
   const user = await userModel.findOne({username: req.session.passport.user});
 
