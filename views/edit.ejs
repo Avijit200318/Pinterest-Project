@@ -21,13 +21,13 @@
                 <input id="fileInput" hidden type="file" name="image">
                 <label class="text-sm my-2 ml-2 cursor-pointer" for="username">Username</label>
                 <input id="username" class="border-2 border-zinc-500 mb-4 px-4 py-3 rounded-full" type="text"
-                    placeholder="username" name="username" value="<%= user.username%>">
+                    placeholder="username" name="username" value="<%= user.username%>" autocomplete="off">
                 <label class="text-sm my-2 ml-2 cursor-pointer" for="name">Name</label>
                 <input id="name" class="border-2 border-zinc-500 mb-4 px-4 py-3 rounded-full" type="text"
-                    placeholder="name" name="name" value="<%= user.name%>">
+                    placeholder="name" name="name" value="<%= user.name%>" autocomplete="off">
                 <label class="text-sm my-2 ml-2 cursor-pointer" for="contact">Contact</label>
                 <input id="contact" class="border-2 border-zinc-500 mb-4 px-4 py-3 rounded-full" type="number"
-                    placeholder="contact" name="contact" value="<%= user.contact%>">
+                    placeholder="contact" name="contact" value="<%= user.contact%>" autocomplete="off">
                 <input
                     class="border-2 font-semibold my-4 px-4 py-3 rounded-full bg-red-600 text-white hover:bg-red-700 transition-all duration-500 cursor-pointer"
                     type="submit" value="Update">
