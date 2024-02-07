@@ -6,10 +6,6 @@
         </form>
         <div class=" w-[90%] profdets flex flex-col items-center bg-white mt-4 py-12 rounded-2xl shadow-[0_3px_10px_rgb(0,0,0,0.2)] sm:w-[80%] xl:w-[70%]">
             <div class="relative">
-                <span id="uploadIcon"
-                    class="w-8 h-8 absolute bottom-0 right-0 rounded-full flex items-center justify-center bg-zinc-200 cursor-pointer">
-                    <i class="ri-pencil-line text-zinc-800"></i>
-                </span>
                 <div class="w-28 h-28 bg-zinc-200 rounded-full overflow-hidden sm:w-32 sm:h-32 md:w-36 md:h-36">
                     <% if (user.profileImage && user.profileImage.contentType && user.profileImage.data) { %>
                         <img class="w-full h-full object-cover overflow-hidden"
@@ -23,14 +19,17 @@
             <h1 class="text-3xl font-semibold mt-3"><%= user.name%></h1>
             <h3 class="text-md">@<%= user.username%></h3>
             <h1 class="font-medium text-sm mt-2">4.6k followers - 11 following</h1>
-            <a href="/edit" class="px-7 py-2 mt-2 bg-zinc-200 rounded-full text-xs font-semibold">Edit</a>
-            <a href="/add" class="px-10 py-2 rounded-lg bg-red-700 font-semibold text-xs text-white mt-5 hover:bg-red-600 transition-all duration-500">Add New Post</a>
+            <div class="flex items-center gap-8">
+                <a href="" class="font-semibold text-xl mt-5"><i class="fa-solid fa-arrow-up-from-bracket"></i></a>
+                <a href="" class="px-4 py-2 rounded-full bg-red-700 font-semibold text-md text-white mt-2 hover:bg-red-600 transition-all duration-500">Follow</a>
+                <a href="" class="font-semibold text-xl  mt-5"><i class="fa-solid fa-ellipsis"></i></a>
+            </div>
         </div>
 
         <div class="w-[90%] cards flex flex-wrap justify-center gap-10 px-10 mt-5 sm:w-[100%] md:w-[90%]">
             <div class="card">
                 <div class="w-60 h-40 bg-zinc-200 rounded-lg overflow-hidden">
-                    <a href="/show/post">
+                    <a href="/show/post/userClick/<%= user._id%>">
                         <img class="w-full h-full object-cover"
                         src="data:<%= user?.posts[0]?.image.contentType %>;base64,<%= user?.posts[0]?.image.data.toString('base64') %>"
                         alt="">
@@ -50,14 +49,4 @@
 
         </div>
     </div>
-
-    <script>
-        document.querySelector("#uploadIcon").addEventListener("click", function () {
-            document.querySelector("#uploadForm input").click();
-        });
-
-        document.querySelector("#uploadForm input").addEventListener("change", function () {
-            document.querySelector("#uploadForm").submit();
-        })
-    </script>
     <% include ./partials/footer.ejs %>

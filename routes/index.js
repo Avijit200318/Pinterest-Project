@@ -62,6 +62,19 @@ router.get("/edit", isLoggedIn, async function (req, res) {
   res.render("edit", { nav: true, activePage: "profile", user: user });
 })
 
+router.get("/profile/:userId", isLoggedIn, async function (req, res) {
+  const user = await userModel.findOne({username: req.session.passport.user}).populate("posts");
+  const clickUser = await userModel.findOne({_id: req.params.userId}).populate("posts");
+  if(clickUser._id.toString() === user._id.toString()){
+    res.redirect("/profile");
+  }
+  res.render("clickProfile", {user: clickUser, nav: true, activePage: 'feed'});
+})
+
+router.get("/show/post/userClick/:userId", isLoggedIn, async function (req, res) {
+  const user = await userModel.findOne({_id: req.params.userId}).populate("posts");
+  res.render("show", {user, nav: true, activePage: 'profile'});
+})
 
 router.post("/update", upload.single('image'), async function (req, res) {
   try {
