@@ -47,9 +47,9 @@
     <div class="w-full flex justify-center border-t-4 border-bg-zinc-100">
         <h1 class="text-2xl font-medium mb-8">More to explore</h1>
     </div>
-    <div class="cards flex flex-wrap justify-center px-2 gap-2 pb-20 md:gap-6  md:px-8 lg:pb-4 xl:px-10 2xl:px-20 2xl:justify-start">
+    <div class="cards flex flex-wrap justify-center px-2 gap-2 pb-20 sm:justify-start sm:gap-[0.5rem] md:pb-4">
         <% allPosts.forEach(function(ele) { %>
-            <div class="card w-40 sm:w-48">
+            <div class="card w-40 sm:w-[32.3%] md:w-[24.1%] lg:w-[19.3%] 2xl:w-[16.1%]">
                 <div class="w-full h-60 bg-sky-200 rounded-lg overflow-hidden sm:h-80">
                     <a href="/show/post/<%= ele._id%>">
                         <img src="data:<%= ele.image.contentType %>;base64,<%= ele.image.data.toString('base64') %>" class="w-full h-full object-cover" alt="">
