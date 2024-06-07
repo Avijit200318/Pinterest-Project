@@ -1,7 +1,13 @@
 const mongoose = require("mongoose");
 const plm = require("passport-local-mongoose");
+const dotenv = require("dotenv");
+dotenv.config();
 // mongodb://127.0.0.1:27017/printestProject
-mongoose.connect("mongodb+srv://avijithira14:yySggpqUSzziOZD9@cluster0.wv0tfyh.mongodb.net");
+mongoose.connect(process.env.MONGO).then(()=> {
+  console.log("mongodb is connected");
+}).catch((error)=> {
+  console.log("error is: " ,error);
+});
 
 const userSchema = mongoose.Schema({
   username: String,
