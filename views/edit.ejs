@@ -1,0 +1,42 @@
+<% include ./partials/header.ejs %>
+    <div class="container px-4 py-8 md:w-full xl:w-[100vw] md:px-12 lg:px-32">
+        <h1 class="text-2xl font-semibold">
+            Edit profile
+        </h1>
+        <p class="mt-2 mb-4 text-base lg:text-lg text-justify">
+            Keep your personal details private. Information you add here is visible to any who can view your profile.
+        </p>
+        <div class="w-full flex flex-col items-center md:items-start">
+            <div class=" flex gap-4 items-center mb-4 w-[90vw] sm:w-[70vw] lg:w-[30vw] px-4">
+                <div class="image w-24 h-24 overflow-hidden rounded-full bg-yellow-500">
+                    <img src="data:<%= user.profileImage.contentType %>;base64,<%= user.profileImage.data.toString('base64') %>"
+                        alt="" class="w-full h-full object-cover">
+                </div>
+                <button id="change"
+                    class="block py-2 px-4 rounded-full bg-zinc-300 font-semibold transition-all duration-500 hover:bg-zinc-400">Change</button>
+            </div>
+
+            <form class="border-4 flex flex-col w-[90vw] sm:w-[70vw] md:w-[30rem] lg:w-[35rem] px-4 rounded-lg mb-12 lg:mb-0" action="/update"
+                method="post" enctype="multipart/form-data">
+                <input id="fileInput" hidden type="file" name="image">
+                <label class="text-sm my-2 ml-2 cursor-pointer" for="username">Username</label>
+                <input id="username" class="border-2 border-zinc-500 mb-4 px-4 py-3 rounded-full" type="text"
+                    placeholder="username" name="username" value="<%= user.username%>" autocomplete="off">
+                <label class="text-sm my-2 ml-2 cursor-pointer" for="name">Name</label>
+                <input id="name" class="border-2 border-zinc-500 mb-4 px-4 py-3 rounded-full" type="text"
+                    placeholder="name" name="name" value="<%= user.name%>" autocomplete="off">
+                <label class="text-sm my-2 ml-2 cursor-pointer" for="contact">Contact</label>
+                <input id="contact" class="border-2 border-zinc-500 mb-4 px-4 py-3 rounded-full" type="number"
+                    placeholder="contact" name="contact" value="<%= user.contact%>" autocomplete="off">
+                <input
+                    class="border-2 font-semibold my-4 px-4 py-3 rounded-full bg-red-600 text-white hover:bg-red-700 transition-all duration-500 cursor-pointer"
+                    type="submit" value="Update">
+            </form>
+        </div>
+    </div>
+    <script>
+        document.getElementById("change").addEventListener('click', function () {
+            document.getElementById("fileInput").click();
+        })
+    </script>
+    <% include ./partials/footer.ejs %>

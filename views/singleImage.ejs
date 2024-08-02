@@ -1,0 +1,79 @@
+<% include ./partials/header.ejs %>
+    <div class="w-full h-auto  flex justify-center pt-8 sm:pt-10 sm:h-[78vh] md:h-[86vh] lg:h-[91vh] md:pt-20">
+        <div class="box w-[95%] bg-white  rounded-2xl flex flex-col overflow-hidden shadow-[0_3px_10px_rgb(0,0,0,0.2)] mb-4 md:[92%] lg:w-[80%] xl:w-[78%] 2xl:w-[70%] sm:justify-center sm:h-[67vh] md:h-[71vh] lg:h-[75vh] sm:mb-0 sm:flex-row">
+            
+            <div class="left bg-red-500 w-[100%] h-[114vw] sm:h-full sm:w-[50%] sm:h-auto xl:w-[50%] xl:h-auto">
+                <img id="postImage" src="data:<%= post.image.contentType %>;base64,<%= post.image.data.toString('base64') %>" class="w-full h-full object-cover" alt="">
+            </div>
+            <div class="right bg-white w-[100%] h-full px-6 pt-8 pb-4 relative sm:w-[50%] sm:px-14 sm:py-12">
+                <div class="w-full inline-block">
+                    <a id="saveButton" class="bg-red-600 text-white float-right px-5 py-2 rounded-full relative left-2 bottom-4 transition-all duration-500 hover:bg-red-500 sm:left-6" href="">Save</a>
+                </div>
+                <h1 class="text-2xl font-semibold uppercase"><%= post.title %></h1>
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-2 items-center">
+                        <div class="image w-16 h-16 rounded-full bg-red-500 mt-5 overflow-hidden">
+                            <a href="/profile/<%= post.user._id%>">
+                                <img src="data:<%= post.user.profileImage.contentType %>;base64,<%= post.user.profileImage.data.toString('base64') %>"
+         class="w-full h-full object-cover" alt="">
+                            </a>
+                        </div>
+                        <div class="mt-4 sm:mt-12">
+                            <h1 class="text-sm font-semibold">@<%= post.user.username %></h1>
+                            <h5 class="text-xs font-semibold opacity-50">100 Followers</h5>
+                        </div>
+                    </div>
+
+                    <button class="h-12 px-5 rounded-full bg-zinc-200 transition-all duration-500 hover:bg-zinc-300">Follow</button>
+                </div>
+                <div class="mt-12">
+                    <div class="py-4 flex flex-col justify-center sm:py-6">
+                        <h1 class="text-xl">Comments</h1>
+                        <p class="text-sm opacity-50 mt-5">No comments yet! Add one to start the conversation</p>
+                    </div>
+                    <hr>
+                    <div class="sm:w-60 md:w-auto">
+                        <div class="w-full flex justify-between items-center">
+                            <h1 class="text-xl pt-5 pb-5">What Do You Think?</h1>
+                            <button class="w-10 h-10 bg-zinc-200 text-xl rounded-full transition-all duration-500 hover:bg-red-500 hover:text-white"><i class="ri-heart-line"></i></button>
+                        </div>
+                        <input class="h-12 w-full bg-zinc-200 px-4 rounded-full" type="text" placeholder="Add a Comment">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-full flex justify-center border-t-4 border-bg-zinc-100">
+        <h1 class="text-2xl font-medium mb-8">More to explore</h1>
+    </div>
+    <div class="cards flex flex-wrap justify-center px-2 gap-2 pb-20 sm:justify-start sm:gap-[0.5rem] md:pb-4">
+        <% allPosts.forEach(function(ele) { %>
+            <div class="card w-40 sm:w-[32.3%] md:w-[24.1%] lg:w-[19.3%] 2xl:w-[16.1%]">
+                <div class="w-full h-60 bg-sky-200 rounded-lg overflow-hidden sm:h-80">
+                    <a href="/show/post/<%= ele._id%>">
+                        <img src="data:<%= ele.image.contentType %>;base64,<%= ele.image.data.toString('base64') %>" class="w-full h-full object-cover" alt="">
+                </a>
+                </div>
+            </div>
+            <% }) %>              
+    </div>
+<% include ./partials/footer.ejs %>
+<script>
+    document.getElementById('saveButton').addEventListener('click', function () {
+        // Get the image source
+        var imageUrl = document.getElementById('postImage').src;
+
+        // Create a temporary link element
+        var downloadLink = document.createElement('a');
+        downloadLink.href = imageUrl;
+        downloadLink.download = 'saved_image.jpg'; // You can set the desired filename
+
+        // Append the link to the body and simulate a click to trigger the download
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+
+        // Remove the link from the body
+        document.body.removeChild(downloadLink);
+    });
+</script>

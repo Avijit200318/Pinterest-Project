@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>  
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="truncate">
+  <nav class="w-full px-2 py-3 flex mt-2 justify-between items-center xl:px-10">
+    <div class="logo flex">
+      <div class="w-7 h-7 rounded-full overflow-hidden">
+        <img class="w-full h-full object-cover" src="/images/logo.png" alt="">
+      </div>
+      <h3 class="text-xl font-medium text-red-700">Pinterest</h3>
+    </div>
+    <div class="buttons">
+      <a class="px-3 py-3 bg-red-600 text-white rounded-full transition-all duration-500 hover:bg-red-700 font-semibold mr-1 hidden sm:mr-4 sm:inline"
+        href="/signIn">Log In</a>
+      <a class="px-3 py-3 bg-zinc-200 rounded-full transition-all duration-500 hover:bg-zinc-300 font-semibold"
+        href="/register">Sign Up</a>
+    </div>
+  </nav>
+  <div class="text h-[18vh] lg:h-[30vh] w-full relative">
+    <div class="absolute top-[94%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+      <h1 class="one text-[3rem] lg:text-[4rem] relative">Get Your next</h1>
+      <h1 class="two text-[3rem] leading-3 text-center text-orange-500">Ideas</h1>
+    </div>
+  </div>
+  <div class="cards flex justify-between gap-4 w-[78vh] sm:w-auto relative">
+    <div class="card w-28 lg:w-48">
+      <div class="image w-full h-96 bg-sky-200 rounded-lg overflow-hidden">
+        <img src="/images/pic1.jpg" class="w-full h-full object-cover" alt="">
+      </div>
+    </div>
+    <div class="card w-40 sm:w-48 mt-[20vh]">
+      <div class="image w-full h-96 bg-sky-200 rounded-lg overflow-hidden">
+        <img src="/images/pic2.jpg" class="w-full h-full object-cover" alt="">
+      </div>
+    </div>
+    <div class="card w-40 sm:w-48 mt-[40vh]">
+      <div class="image w-full h-96 bg-sky-200 rounded-lg overflow-hidden">
+        <img src="/images/pic3.jpg" class="w-full h-full object-cover" alt="">
+      </div>
+    </div>
+    <div class="card w-40 sm:w-48 mt-[50vh]">
+      <div class="image w-full h-96 bg-sky-200 rounded-lg overflow-hidden">
+        <img src="/images/pic4.jpg" class="w-full h-full object-cover" alt="">
+      </div>
+    </div>
+    <div class="card w-40 sm:w-48 mt-[40vh]">
+      <div class="image w-full h-96 bg-sky-200 rounded-lg overflow-hidden">
+        <img src="/images/pic5.jpg" class="w-full h-full object-cover" alt="">
+      </div>
+    </div>
+    <div class="card w-40 sm:w-48 mt-[20vh]">
+      <div class="image w-full h-96 bg-sky-200 rounded-lg overflow-hidden">
+        <img src="/images/pic6.jpg" class="w-full h-full object-cover" alt="">
+      </div>
+    </div>
+    <div class="card w-40 sm:w-48">
+      <div class="image w-full h-96 bg-sky-200 rounded-lg overflow-hidden">
+        <img src="/images/pic7.jpg" class="w-full h-full object-cover" alt="">
+      </div>
+    </div>
+
+  </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+  var tl = gsap.timeline();
+  tl
+    .from(".one", {
+      opacity: 0,
+      duration: 0.75,
+      top: 40
+    })
+    .from(".two", {
+      opacity: 0,
+      duration: 0.5,
+      top: 80
+    })
+    .from(".cards", {
+      opacity: 0,
+      duration: 0.75,
+      top: 50
+    })
+</script>
+
+</html>
